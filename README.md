@@ -20,4 +20,6 @@ Babylonjs &amp; ReactNative(Expo)
 
 after npm install
 
-## As result you should see a purple rectangle - which is actually a babylonjs scene.
+## If everything good, you should see this:
+
+![Alt text](https://i.imgur.com/4TyDs7z.jpg?raw=true "babylonJS+reactNative")
