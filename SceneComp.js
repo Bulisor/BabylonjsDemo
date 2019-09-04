@@ -4,13 +4,17 @@ import { Text, View } from 'react-native';
 
 import { Engine } from "@babylonjs/core/Engines/engine";
 import { Scene } from "@babylonjs/core/scene";
-import { FreeCamera } from "@babylonjs/core/Cameras/freeCamera";
+import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { Vector3 } from "@babylonjs/core/Maths/math";
 
-import { GridMaterial } from "@babylonjs/materials/grid";
+import { GridMaterial } from "@babylonjs/materials/grid/gridMaterial";
 import { Mesh } from "@babylonjs/core/Meshes/mesh";
 import "@babylonjs/core/Meshes/meshBuilder";
+import "@babylonjs/core/Materials/standardMaterial";
+
+// import { SceneLoader } from "@babylonjs/core/Loading/sceneLoader";
+// import "@babylonjs/loaders/glTF/2.0";
 
 class SceneComp extends React.Component {
     componentDidMount () {};
@@ -25,10 +29,7 @@ class SceneComp extends React.Component {
         const scene = new Scene(engine);
 
         // This creates and positions a free camera (non-mesh)
-        var camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
-        
-        // This targets the camera to scene origin
-        camera.setTarget(Vector3.Zero());
+        const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 10, new Vector3(0, 0, 0), scene);
 
         // We cann't attach camera to canvas becaus in this case we do not have canvas
         // camera.attachControl(canvas, true);
@@ -40,30 +41,33 @@ class SceneComp extends React.Component {
         light.intensity = 0.7;
 
         // Create a grid material
-        // const material = new GridMaterial("grid", scene);
+        const material = new GridMaterial("grid", scene);
 
         // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-        // const sphere = Mesh.CreateSphere("sphere1", 16, 2, scene);
+        const sphere = Mesh.CreateSphere("sphere1", 16, 2, scene);
 
         // Move the sphere upward 1/2 its height
-        // sphere.position.y = 2;
+        sphere.position.y = 2;
 
         // Affect a material
         // sphere.material = material;
 
         // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-        // const ground = Mesh.CreateGround("ground1", 6, 6, 2, scene);
+        const ground = Mesh.CreateGround("ground1", 6, 6, 2, scene);
 
         // Affect a material
-        // ground.material = material;
+        ground.material = material;
 
-        scene.registerBeforeRender(function () {
-            // ground.rotation.y += 0.001
+        //TODO: import gltf/glb model
+        // await SceneLoader.ImportMeshAsync("", "https://models.babylonjs.com/", "seagulf.glb", scene, null, '.glb');
+        
+        scene.registerBeforeRender(() => {
+            ground.rotation.y += 0.01
 
             gl.endFrameEXP(); 
         });
 
-        engine.runRenderLoop(function() {
+        engine.runRenderLoop(() => {
             if (scene) {
                 scene.render();
             }
