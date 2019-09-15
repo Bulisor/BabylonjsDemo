@@ -20,6 +20,6 @@ Babylonjs &amp; ReactNative(Expo)
 
 after npm install
 
-## If everything good, you should see this:
+## What we can do till now:
 
-![Alt text](https://i.imgur.com/4TyDs7z.jpg?raw=true "babylonJS+reactNative")
+https://imgur.com/a/b4eK1Mo
