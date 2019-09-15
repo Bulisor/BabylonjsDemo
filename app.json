@@ -7,6 +7,16 @@
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "packagerOpts": {
+      "assetExts": ["glb", "gltf", "bin", "env", "dds"]
+    },
     "entryPoint": "node_modules/expo/AppEntry.js",
     "platforms": [
       "ios",

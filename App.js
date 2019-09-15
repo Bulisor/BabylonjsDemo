@@ -1,36 +1,19 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Text, View} from 'react-native';
 
-import SceneComp from './SceneComp';
-
-const instructions = Platform.select({  
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',  
-  android:  
-    'Double tap R on your keyboard to reload,\n' +  
-    'Shake or press menu button for dev menu',  
-});  
+import SceneComp1 from './components/SceneComp1';
+import SceneComp2 from './components/SceneComp2';
+import SceneComp3 from './components/SceneComp3';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <SceneComp/>
-        <Text style={styles.instructions}>{instructions}</Text>  
-      </View>
+        <ScrollView>
+          <SceneComp1 name='Basic Scene - working' />
+          <SceneComp2 name='PBR Material/Import textures' />
+          <SceneComp3 name='Import 3d Object' />
+          <Text>Comming soon...</Text>  
+        </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({  
-  container: {  
-    flex: 1,  
-    justifyContent: 'center',  
-    alignItems: 'center',  
-    backgroundColor: '#F5FCFF',  
-  }, 
-  instructions: {  
-    textAlign: 'center',  
-    color: '#333333',  
-    marginBottom: 5,  
-  },  
-});  
