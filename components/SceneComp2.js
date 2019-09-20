@@ -14,13 +14,9 @@ import '@babylonjs/core/Materials/Textures/Loaders/ddsTextureLoader';
 
 import { Mesh } from "@babylonjs/core/Meshes/mesh";
 import { PBRMaterial } from "@babylonjs/core/Materials/PBR/pbrMaterial";
-import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial";
 import "@babylonjs/core/Meshes/meshBuilder";
 import '@babylonjs/core/Materials/standardMaterial';
 
-// for dds image
-import '@babylonjs/core/Materials/Textures/Loaders/ddsTextureLoader';
-import '@babylonjs/core/Helpers/sceneHelpers'
 import SceneTemplate from '../SceneTemplate';
 
 class SceneComp2 extends React.Component {
@@ -40,37 +36,22 @@ class SceneComp2 extends React.Component {
     envTexture.name = "envTex";
     envTexture.gammaSpace = false;
     scene.environmentTexture = envTexture;
-    //scene.environmentBRDFTexture = envTexture;
-
-    // Add the brdf environment texture
-    // const brdfenvTextureURL = 'https://assets.babylonjs.com/environments/fullFloatEnvironmentBrdf.dds';
-    // const brdfenvTextureAsset = await AssetUtils.resolveAsync(brdfenvTextureURL);
-    // const brdfenvTexture = Texture.LoadFromDataString("image", brdfenvTextureAsset, scene);
-    // brdfenvTexture.isRGBD = true;
-    // brdfenvTexture.wrapU = Texture.CLAMP_ADDRESSMODE;
-    // brdfenvTexture.wrapV = Texture.CLAMP_ADDRESSMODE;
-    // scene.environmentBRDFTexture = brdf2;
-  
+   
     // Load the image from server 
     const url = 'https://preview.smarteam3d.com/build/image2.jpg';
     const asset = await AssetUtils.resolveAsync(url);
-    // const fileContents = await readAsStringAsync(asset.uri);
-    // alert(fileContents);
-
+   
     // Create the texture
     const texture = Texture.LoadFromDataString("image", asset, scene);
-    // const texture = new Texture("", scene, false, false, Texture.BILINEAR_SAMPLINGMODE, null, null, asset, true);
-    // const texture = Texture.Parse(fileContents, scene, "");
-
+ 
     // Create a pbr material
-    // const material = new PBRMaterial("ground", scene);
-    // material.albedoTexture = texture;
-    // material.environmentBRDFTexture = brdf2;
-    const material = new StandardMaterial("ground", scene);
-    material.diffuseTexture = texture;
+    const material = new PBRMaterial("ground", scene);
+    material.albedoTexture = texture;
+    material.roughness = 0.5;
+    material.metallic = 0.5;
 
     // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-    const ground = Mesh.CreateGround("ground1", 6, 6, 2, scene);
+    const ground = Mesh.CreateGround("ground1", 6, 6, 1, scene);
     ground.scaling.x = 1.5;
  
     // attach the material to ground 
@@ -78,15 +59,14 @@ class SceneComp2 extends React.Component {
 
     // Create a pbr material
     const material2 = new PBRMaterial("glass", scene);
-    // material2.indexOfRefraction = 0.52;
-    // material2.alpha = 0.6;
-    // material2.microSurface = 1;
-    // material2.reflectivityColor = new Color3(0.2, 0.2, 0.2);
-    // material2.albedoColor = new Color3(0.85, 0.85, 0.85);
-    // material2.environmentBRDFTexture = brdf2;
+    material2.indexOfRefraction = 0.52;
+    material2.alpha = 0.5;
+    material2.microSurface = 1;
+    material2.reflectivityColor = new Color3(0.2, 0.2, 0.2);
+    material2.albedoColor = new Color3(0.4, 0.4, 0.4);
 
     // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-    const sphere = Mesh.CreateSphere("sphere1", 16, 1, scene);
+    const sphere = Mesh.CreateSphere("sphere1", 16, 2, scene);
 
     // attach the material to sphere
     sphere.material = material2;

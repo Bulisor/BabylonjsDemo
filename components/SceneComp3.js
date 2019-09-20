@@ -7,26 +7,14 @@ import { Asset } from 'react-native-unimodules';
 import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
-// import { Color3 } from "@babylonjs/core/Maths/math.color";
-
-// import { GridMaterial } from "@babylonjs/materials/grid/gridMaterial";
-import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
 import { CubeTexture } from '@babylonjs/core/Materials/Textures/cubeTexture';
 import { Texture } from '@babylonjs/core/Materials/Textures/texture';
-
-import { Mesh } from "@babylonjs/core/Meshes/mesh";
-// for basic shapes
-import "@babylonjs/core/Meshes/meshBuilder";
 
 import { SceneLoader } from "@babylonjs/core/Loading/sceneLoader";
 import { GLTFLoader } from '@babylonjs/loaders/glTF/2.0/glTFLoader';
 
 // for compressed glb files
-import '@babylonjs/loaders/glTF/2.0';
-// for dds image
-import '@babylonjs/core/Materials/Textures/Loaders/ddsTextureLoader';
-import '@babylonjs/core/Materials/PBR/pbrBaseMaterial';
-// import { PBRBaseMaterial } from '@babylonjs/core/Materials/PBR/pbrBaseMaterial';
+import '@babylonjs/loaders/glTF/2.0/Extensions/KHR_draco_mesh_compression';
 
 import SceneTemplate from '../SceneTemplate';
 
@@ -35,11 +23,7 @@ class SceneComp3 extends React.Component {
         var CustomParseLoader = (loader) => {
             loader.onParsedObservable.add(data => {
                 // alert('CustomParseLoader ')
-                alert('1CustomParseLoader ' + JSON.stringify(data.json))
-                // alert('2CustomParseLoader ' + JSON.stringify(data.bin))
-                /// const json = data.json;
-                // const buffer = json.buffers[0].uri
-                // alert(buffer)
+                // alert('1CustomParseLoader ' + JSON.stringify(data.json))
             });
         }
 
@@ -50,16 +34,12 @@ class SceneComp3 extends React.Component {
 
             this.createMaterial = function (context, material, babylonDrawMode) {
                 //alert(JSON.stringify(babylonDrawMode))
-                // find a way to let this pass
-                // material.environmentBRDFTexture = null;
                 return material;
             }
 
-            this.loadMaterialPropertiesAsync = function (context, material, babylonMaterial) {
-    
-                material.environmentBRDFTexture = null;
-                var promises = [];
-                var pbrMetallicRoughness = material.pbrMetallicRoughness;
+            // this.loadMaterialPropertiesAsync = function (context, material, babylonMaterial) {
+                // var promises = [];
+                /*var pbrMetallicRoughness = material.pbrMetallicRoughness;
                 if (pbrMetallicRoughness) {
                     if (pbrMetallicRoughness.baseColorTexture) {
                         promises.push(
@@ -76,11 +56,11 @@ class SceneComp3 extends React.Component {
                             )
                         );
                     }
-                }
+                }*/
             
-                return Promise.all(promises);
+                // return Promise.all(promises);
                 // material.environmentBRDFTexture = null;
-            }
+            // }
         }
 
         GLTFLoader.RegisterExtension("CustomMaterialLoader", function (loader) { return new CustomMaterialLoader(loader); });
@@ -96,13 +76,20 @@ class SceneComp3 extends React.Component {
         const light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
         light.intensity = 0.7; 
 
+        // Add the environment manually, instead of createDefaultEnvironment function
+        const envTexture = CubeTexture.CreateFromPrefilteredData('https://preview.smarteam3d.com/build/environment.dds', scene);
+        envTexture.name = "envTex";
+        envTexture.gammaSpace = false;
+        scene.environmentTexture = envTexture;
+
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://preview.smarteam3d.com/build/", "cylinder2.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', 'https://preview.smarteam3d.com/build/', 'cylinder.glb', scene, null, '.glb')).meshes;
-        // const ms = (await SceneLoader.ImportMeshAsync('', 'https://preview.smarteam3d.com/build/', 'cylinder2.gltf', scene, null, '.gltf')).meshes;
-        // alert(ms);
+        const ms = (await SceneLoader.ImportMeshAsync('', "https://models.babylonjs.com/", "emoji_heart.glb", scene, null, '.glb')).meshes;
+        // const ms = (await SceneLoader.ImportMeshAsync('', "https://models.babylonjs.com/shaderBall/", "BabylonShaderBall_Simple.gltf", scene, null, '.gltf')).meshes;
+        alert(ms);
         
         // Load glb from local
-        // const glb = Asset.fromModule(require('./assets/gagica.glb'));
+        // const glb = Asset.fromModule(require('./assets/character.glb'));
         // await glb.downloadAsync();
         // alert(JSON.stringify(glb))
         // const asset2 = await AssetUtils.resolveAsync(glb.localUri);
@@ -119,17 +106,6 @@ class SceneComp3 extends React.Component {
         // alert(JSON.stringify(responseJson))
         // asset2 = 'data:'+ JSON.stringify(responseJson);
         // alert(JSON.stringify(responseJson))
-        
-        // alert('22 '+ JSON.stringify(asset2))
-        // const ms = (await SceneLoader.ImportMeshAsync('', 'https://preview.smarteam3d.com/build/', 'cylinder.glb', scene, null, '.glb')).meshes;
-        // alert(ms);
-        // SceneLoader.AppendAsync("https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF/CesiumMan.gltf").then(function () {
-    
-        // SceneLoader.ImportMesh("", "", "data:" + responseJson, scene2, function (newMeshes) {
-        //    console.log("newMeshes: " + newMeshes);
-        //});
-    
-        // alert(ms.length)
 
         //const modelAsset = Asset.fromModule(require('./assets/wooden-duck.obj'));
         //await modelAsset.downloadAsync();
