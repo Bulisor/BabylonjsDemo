@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AssetUtils from 'expo-asset-utils';
-import { readAsStringAsync } from 'expo-file-system';
+import { Asset } from 'react-native-unimodules';
+// import { readAsStringAsync } from 'expo-file-system';
 
 import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
@@ -31,18 +32,30 @@ class SceneComp2 extends React.Component {
     const light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
     light.intensity = 0.7; 
 
-    // Add the environment manually, instead of createDefaultEnvironment function
+    // Add the environment manually, instead of createDefaultEnvironment function- use Image tag
     const envTexture = CubeTexture.CreateFromPrefilteredData('https://preview.smarteam3d.com/build/environment.dds', scene);
     envTexture.name = "envTex";
     envTexture.gammaSpace = false;
     scene.environmentTexture = envTexture;
+
+    // Add environmentBRDFTexture to avoid calling GetEnvironmentBRDFTexture internally- use Image tag
+    const urlBRDF = 'https://preview.smarteam3d.com/build/correlatedMSBRDF_RGBD.png';
+    const assetBRDF = await AssetUtils.resolveAsync(urlBRDF);
+    const envBRDFTexture = Texture.LoadFromDataString("image", assetBRDF, scene, true,true,true, Texture.BILINEAR_SAMPLINGMODE);
+    envBRDFTexture.isRGBD = true;
+    scene.environmentBRDFTexture = envBRDFTexture;
    
     // Load the image from server 
     const url = 'https://preview.smarteam3d.com/build/image2.jpg';
     const asset = await AssetUtils.resolveAsync(url);
    
+    // Load the image from local folder
+    // const url = Asset.fromModule(require('../assets/grass.jpg'));
+    // await url.downloadAsync();
+    // const asset = await AssetUtils.resolveAsync(url.localUri);
+
     // Create the texture
-    const texture = Texture.LoadFromDataString("image", asset, scene);
+    const texture = Texture.LoadFromDataString("image", asset, scene, true);
  
     // Create a pbr material
     const material = new PBRMaterial("ground", scene);

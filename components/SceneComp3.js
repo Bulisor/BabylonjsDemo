@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View  } from 'react-native';
 import AssetUtils from 'expo-asset-utils';
-import { readAsStringAsync } from 'expo-file-system';
+// import { readAsStringAsync } from 'expo-file-system';
 import { Asset } from 'react-native-unimodules';
 
 import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera";
@@ -32,44 +32,101 @@ class SceneComp3 extends React.Component {
             this.enabled = true;
             //alert('CustomMaterialLoader '+ JSON.stringify(loader));
 
-            this.createMaterial = function (context, material, babylonDrawMode) {
-                //alert(JSON.stringify(babylonDrawMode))
-                return material;
-            }
-
-            // this.loadMaterialPropertiesAsync = function (context, material, babylonMaterial) {
-                // var promises = [];
-                /*var pbrMetallicRoughness = material.pbrMetallicRoughness;
+            this.loadMaterialPropertiesAsync = function (context, material, babylonMaterial) {
+                var promises = [];
+                var pbrMetallicRoughness = material.pbrMetallicRoughness;
+                alert(JSON.stringify(material))
                 if (pbrMetallicRoughness) {
                     if (pbrMetallicRoughness.baseColorTexture) {
+                        alert('1 ')
                         promises.push(
                             loader.loadTextureInfoAsync(
                                 context + "/pbrMetallicRoughness/baseColorTexture",
                                 pbrMetallicRoughness.baseColorTexture,
-                                async function (babylonTexture) {
-                                    alert('1 ',babylonTexture);
+                                function (babylonTexture) {
+                                    alert('11')
                                     // babylonMaterial.albedoTexture = Texture.LoadFromDataString("image", babylonTexture, scene);
-                                    const url = 'https://preview.smarteam3d.com/build/image2.jpg';
-                                    const asset = await AssetUtils.resolveAsync(url);
-                                    babylonMaterial.albedoTexture = Texture.LoadFromDataString("image", asset, scene);
+                                    // const url = 'https://preview.smarteam3d.com/build/image2.jpg';
+                                    // const asset = await AssetUtils.resolveAsync(url);
+                                    babylonMaterial.albedoTexture = null //Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene, true,true,true, Texture.BILINEAR_SAMPLINGMODE); // Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene);
                                 }
                             )
                         );
                     }
-                }*/
-            
-                // return Promise.all(promises);
-                // material.environmentBRDFTexture = null;
-            // }
+                    if (pbrMetallicRoughness.metallicRoughnessTexture) {
+                        alert('2 ')
+                        promises.push(
+                            loader.loadTextureInfoAsync(
+                                context + "/pbrMetallicRoughness/metallicRoughnessTexture",
+                                pbrMetallicRoughness.metallicRoughnessTexture,
+                                function (babylonTexture) {
+                                    alert('21')
+                                    // babylonMaterial.albedoTexture = Texture.LoadFromDataString("image", babylonTexture, scene);
+                                    // const url = 'https://preview.smarteam3d.com/build/image2.jpg';
+                                    // const asset = await AssetUtils.resolveAsync(url);
+                                    babylonMaterial.metallicTexture = null //Texture.LoadFromDataString("image", asset, loader.babylonScene);
+                                }
+                            )
+                        );
+                    }
+                }
+                if (material.occlusionTexture) {
+                    alert('3 ')
+                    promises.push(
+                        loader.loadTextureInfoAsync(
+                            context + "/material/occlusionTexture",
+                            material.occlusionTexture,
+                            function (babylonTexture) {
+                                // babylonMaterial.albedoTexture = Texture.LoadFromDataString("image", babylonTexture, scene);
+                                // const url = 'https://preview.smarteam3d.com/build/image2.jpg';
+                                // const asset = await AssetUtils.resolveAsync(url);
+                                babylonMaterial.ambientTexture = null //Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene, true,true,true, Texture.BILINEAR_SAMPLINGMODE); // Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene);
+                            }
+                        )
+                    );
+                }
+                if (material.normalTexture) {
+                    alert('4 ')
+                    promises.push(
+                        loader.loadTextureInfoAsync(
+                            context + "/material/normalTexture",
+                            material.normalTexture,
+                            function (babylonTexture) {
+                                // babylonMaterial.albedoTexture = Texture.LoadFromDataString("image", babylonTexture, scene);
+                                // const url = 'https://preview.smarteam3d.com/build/image2.jpg';
+                                // const asset = await AssetUtils.resolveAsync(url);
+                                babylonMaterial.bumpTexture = null //Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene, true,true,true, Texture.BILINEAR_SAMPLINGMODE); // Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene);
+                            }
+                        )
+                    );
+                }
+                if (material.emissiveTexture) {
+                    alert('5 ')
+                    promises.push(
+                        loader.loadTextureInfoAsync(
+                            context + "/material/emissiveTexture",
+                            material.emissiveTexture,
+                            function (babylonTexture) {
+                                // babylonMaterial.albedoTexture = Texture.LoadFromDataString("image", babylonTexture, scene);
+                                // const url = 'https://preview.smarteam3d.com/build/image2.jpg';
+                                // const asset = await AssetUtils.resolveAsync(url);
+                                babylonMaterial.emissiveTexture = null //Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene, true,true,true, Texture.BILINEAR_SAMPLINGMODE); // Texture.LoadFromDataString("image", babylonTexture._buffer, loader.babylonScene);
+                            }
+                        )
+                    );
+                }
+                return Promise.all(promises);
+            }
         }
 
-        GLTFLoader.RegisterExtension("CustomMaterialLoader", function (loader) { return new CustomMaterialLoader(loader); });
-        SceneLoader.OnPluginActivatedObservable.addOnce(function (loader) { return new CustomParseLoader(loader); });
+        // GLTFLoader.RegisterExtension("CustomMaterialLoader", function (loader) { return new CustomMaterialLoader(loader); });
+        // SceneLoader.OnPlugnActivatedObservable.addOnce(function (loader) { return new CustomParseLoader(loader); });
+        // SceneLoader.CleanBoneMatrixWeights = true;
 
         // This creates and positions a arcRotate camera
         const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 10, new Vector3(0, 0, 0), scene);
         camera.upperBetaLimit = Math.PI / 2;
-        camera.lowerRadiusLimit = 5;
+        camera.lowerRadiusLimit = 1;
         camera.upperRadiusLimit = 25;
         
         // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
@@ -82,13 +139,21 @@ class SceneComp3 extends React.Component {
         envTexture.gammaSpace = false;
         scene.environmentTexture = envTexture;
 
+        // Add environmentBRDFTexture to avoid calling GetEnvironmentBRDFTexture internally- use Image tag
+        const urlBRDF = 'https://preview.smarteam3d.com/build/correlatedMSBRDF_RGBD.png';
+        const assetBRDF = await AssetUtils.resolveAsync(urlBRDF);
+        const envBRDFTexture = Texture.LoadFromDataString("image", assetBRDF, scene, true,true,true, Texture.BILINEAR_SAMPLINGMODE);
+        envBRDFTexture.isRGBD = true;
+        scene.environmentBRDFTexture = envBRDFTexture;
+
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://preview.smarteam3d.com/build/", "cylinder2.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', 'https://preview.smarteam3d.com/build/', 'cylinder.glb', scene, null, '.glb')).meshes;
-        const ms = (await SceneLoader.ImportMeshAsync('', "https://models.babylonjs.com/", "emoji_heart.glb", scene, null, '.glb')).meshes;
+        const ms = (await SceneLoader.ImportMeshAsync('', "https://www.babylonjs-playground.com/scenes/BrainStem/", "BrainStem.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://models.babylonjs.com/shaderBall/", "BabylonShaderBall_Simple.gltf", scene, null, '.gltf')).meshes;
-        alert(ms);
+        // const ms = (await SceneLoader.ImportMeshAsync('', "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxTextured/glTF/", "BoxTextured.gltf", scene, null, '.gltf')).meshes;
+        // alert(ms);
         
-        // Load glb from local
+        // Load glb/gltf from local folder
         // const glb = Asset.fromModule(require('./assets/character.glb'));
         // await glb.downloadAsync();
         // alert(JSON.stringify(glb))
@@ -97,21 +162,6 @@ class SceneComp3 extends React.Component {
         // Load glb from server
         // const url2 = 'https://preview.smarteam3d.com/build/cylinder.glb';
         // let asset2 = await AssetUtils.resolveAsync(url2);
-        
-        // alert(JSON.stringify(asset2))
-        // asset2 = 'data:' + asset2;
-
-        // let response = await fetch(url2);
-        // let responseJson = await response.arrayBuffer();
-        // alert(JSON.stringify(responseJson))
-        // asset2 = 'data:'+ JSON.stringify(responseJson);
-        // alert(JSON.stringify(responseJson))
-
-        //const modelAsset = Asset.fromModule(require('./assets/wooden-duck.obj'));
-        //await modelAsset.downloadAsync();
-        //const loader = new THREE.OBJLoader();
-        //const model = loader.parse(
-        //await Expo.FileSystem.readAsStringAsync(modelAsset.localUri))
     }
 
     render() {

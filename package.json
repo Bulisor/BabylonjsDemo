@@ -23,9 +23,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
-    "@babylonjs/core": "^4.1.0-alpha.19",
-    "@babylonjs/loaders": "^4.1.0-alpha.19",
-    "@babylonjs/materials": "^4.1.0-alpha.19",
+    "@babylonjs/core": "^4.1.0-alpha.22",
+    "@babylonjs/loaders": "^4.1.0-alpha.22",
+    "@babylonjs/materials": "^4.1.0-alpha.22",
     "babel-jest": "24.1.0",
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.54.0",
