@@ -23,7 +23,7 @@ import SceneTemplate from '../SceneTemplate';
 class SceneComp2 extends React.Component {
   onInitScene = async (scene) => {
     // This creates and positions a arcRotate camera
-    const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 10, new Vector3(0, 0, 0), scene);
+    const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1, 15, new Vector3(0, 0, 0), scene);
     camera.upperBetaLimit = Math.PI / 2;
     camera.lowerRadiusLimit = 5;
     camera.upperRadiusLimit = 25;
@@ -83,6 +83,11 @@ class SceneComp2 extends React.Component {
 
     // attach the material to sphere
     sphere.material = material2;
+
+    scene.registerBeforeRender(() => {
+      ground.rotation.y += 0.01;
+      sphere.rotation.y += 0.01;
+    });
   }
 
   render() {

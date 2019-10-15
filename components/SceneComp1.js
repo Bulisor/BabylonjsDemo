@@ -33,17 +33,15 @@ class SceneComp1 extends React.Component {
     // Create a grid material
     var material = new GridMaterial("grid", scene);
 
-    // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-    var sphere = Mesh.CreateSphere("sphere1", 16, 2, scene);
+    // Our built-in 'box' shape. Params: name, size, scene
+    var box = Mesh.CreateBox("box", 2, scene);
 
     // Affect a material
-    sphere.material = material;
+    box.material = material;
 
-    // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-    var ground = Mesh.CreateGround("ground1", 6, 6, 2, scene);
-
-    // Affect a material
-    ground.material = material;
+    scene.registerBeforeRender(() => {
+      box.rotation.y += 0.01;
+    });
   }
 
   render() {

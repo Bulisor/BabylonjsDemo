@@ -124,7 +124,7 @@ class SceneComp3 extends React.Component {
         // SceneLoader.CleanBoneMatrixWeights = true;
 
         // This creates and positions a arcRotate camera
-        const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 10, new Vector3(0, 0, 0), scene);
+        const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 5, new Vector3(0, 0, 0), scene);
         camera.upperBetaLimit = Math.PI / 2;
         camera.lowerRadiusLimit = 1;
         camera.upperRadiusLimit = 25;
@@ -146,8 +146,6 @@ class SceneComp3 extends React.Component {
         envBRDFTexture.isRGBD = true;
         scene.environmentBRDFTexture = envBRDFTexture;
 
-        // const ms = (await SceneLoader.ImportMeshAsync('', "https://preview.smarteam3d.com/build/", "cylinder2.gltf", scene, null, '.gltf')).meshes;
-        // const ms = (await SceneLoader.ImportMeshAsync('', 'https://preview.smarteam3d.com/build/', 'cylinder.glb', scene, null, '.glb')).meshes;
         const ms = (await SceneLoader.ImportMeshAsync('', "https://www.babylonjs-playground.com/scenes/BrainStem/", "BrainStem.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://models.babylonjs.com/shaderBall/", "BabylonShaderBall_Simple.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxTextured/glTF/", "BoxTextured.gltf", scene, null, '.gltf')).meshes;
@@ -159,9 +157,6 @@ class SceneComp3 extends React.Component {
         // alert(JSON.stringify(glb))
         // const asset2 = await AssetUtils.resolveAsync(glb.localUri);
         // alert(JSON.stringify(asset2))
-        // Load glb from server
-        // const url2 = 'https://preview.smarteam3d.com/build/cylinder.glb';
-        // let asset2 = await AssetUtils.resolveAsync(url2);
     }
 
     render() {
