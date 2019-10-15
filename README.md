@@ -1,5 +1,6 @@
-# BabylonjsDemo
-Babylonjs &amp; ReactNative(Expo) 
+# Babylonjs &amp; ReactNative(Expo)
+Simple app using ReactNative and BabylonJS 
+Showcase - https://imgur.com/a/idgbQEG
 
 ## Getting Started
 
@@ -20,15 +21,13 @@ Babylonjs &amp; ReactNative(Expo)
 
 after npm install
 
-## What we have do till now:
+## What we have till now:
 
 - support basic shapes
 - support all types of lights and cameras
 - support all types of materials
 - import images as textures (local or via url), supported extensions: png, jpg, dds
 - import animated 3d objects, support only glb files which do not contain images
-
-https://imgur.com/a/idgbQEG
 
 ## TODO:
 
