@@ -20,6 +20,17 @@ Babylonjs &amp; ReactNative(Expo)
 
 after npm install
 
-## What we can do till now:
+## What we have do till now:
 
-https://imgur.com/a/b4eK1Mo
+- support basic shapes
+- support all types of lights and cameras
+- support all types of materials
+- import images as textures (local or via url), supported extensions: png, jpg, dds
+- import animated 3d objects, support only glb files which do not contain images
+
+https://imgur.com/a/idgbQEG
+
+## TODO:
+
+- add fully suport of glb and gltf files
+- add VR/AR features

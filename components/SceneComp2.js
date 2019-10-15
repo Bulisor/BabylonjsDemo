@@ -22,7 +22,7 @@ import SceneTemplate from '../SceneTemplate';
 
 class SceneComp2 extends React.Component {
   onInitScene = async (scene) => {
-    // This creates and positions a arcRotate camera
+    // This creates and positions an arcRotate camera
     const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1, 15, new Vector3(0, 0, 0), scene);
     camera.upperBetaLimit = Math.PI / 2;
     camera.lowerRadiusLimit = 5;

@@ -123,7 +123,7 @@ class SceneComp3 extends React.Component {
         // SceneLoader.OnPlugnActivatedObservable.addOnce(function (loader) { return new CustomParseLoader(loader); });
         // SceneLoader.CleanBoneMatrixWeights = true;
 
-        // This creates and positions a arcRotate camera
+        // This creates and positions an arcRotate camera
         const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 5, new Vector3(0, 0, 0), scene);
         camera.upperBetaLimit = Math.PI / 2;
         camera.lowerRadiusLimit = 1;
