@@ -3,25 +3,24 @@
   "displayName": "Babylonjs-RN Demo",
   "expo": {
     "name": "BabylonjsDemo",
+    "icon": "assets/icon_n_white.png",
     "slug": "expo-template-bare",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
+    "ios": {
+      "bundleIdentifier": "com.smarteam3d.BabylonjsDemo"
+    },
+    "android": {
+      "package": "com.smarteam3d.BabylonjsDemo"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
     ],
-    "packagerOpts": {
-      "assetExts": ["glb", "gltf", "bin", "env", "dds"]
-    },
-    "entryPoint": "node_modules/expo/AppEntry.js",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ]
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }

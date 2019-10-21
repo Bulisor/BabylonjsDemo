@@ -146,7 +146,8 @@ class SceneComp3 extends React.Component {
         envBRDFTexture.isRGBD = true;
         scene.environmentBRDFTexture = envBRDFTexture;
 
-        const ms = (await SceneLoader.ImportMeshAsync('', "https://www.babylonjs-playground.com/scenes/BrainStem/", "BrainStem.gltf", scene, null, '.gltf')).meshes;
+        const ms = (await SceneLoader.ImportMeshAsync('', "https://preview.smarteam3d.com/build/", "BrainStem.gltf", scene, null, '.gltf')).meshes;
+        // const ms = (await SceneLoader.ImportMeshAsync('', "https://www.babylonjs-playground.com/scenes/BrainStem/", "BrainStem.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://models.babylonjs.com/shaderBall/", "BabylonShaderBall_Simple.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxTextured/glTF/", "BoxTextured.gltf", scene, null, '.gltf')).meshes;
         // alert(ms);
