@@ -116,6 +116,8 @@ android {
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
+            // minifyEnabled false // bernard fix, but is not working
+            // useProguard false // bernard fix, but is not working
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
