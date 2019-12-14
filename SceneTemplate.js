@@ -74,6 +74,7 @@ class SceneTemplate extends React.Component {
         
         // Disable LoadingScreen and IDBStorage
         SceneLoader.ShowLoadingScreen = false;
+        SceneLoader.CleanBoneMatrixWeights = true;
         Database.IDBStorageEnabled = false;
 
         // Create our first scene

@@ -33,20 +33,20 @@ class SceneComp2 extends React.Component {
     light.intensity = 0.7; 
 
     // Add the environment manually, instead of createDefaultEnvironment function- use Image tag
-    const envTexture = CubeTexture.CreateFromPrefilteredData('https://preview.smarteam3d.com/build/environment.dds', scene);
+    const envTexture = CubeTexture.CreateFromPrefilteredData('https://playground.babylonjs.com/textures/environment.dds', scene);
     envTexture.name = "envTex";
     envTexture.gammaSpace = false;
     scene.environmentTexture = envTexture;
 
     // Add environmentBRDFTexture to avoid calling GetEnvironmentBRDFTexture internally- use Image tag
-    const urlBRDF = 'https://preview.smarteam3d.com/build/correlatedMSBRDF_RGBD.png';
+    const urlBRDF = 'https://assets.babylonjs.com/environments/correlatedMSBRDF_RGBD.png';
     const assetBRDF = await AssetUtils.resolveAsync(urlBRDF);
     const envBRDFTexture = Texture.LoadFromDataString("image", assetBRDF, scene, true,true,true, Texture.BILINEAR_SAMPLINGMODE);
     envBRDFTexture.isRGBD = true;
     scene.environmentBRDFTexture = envBRDFTexture;
    
     // Load the image from server 
-    const url = 'https://preview.smarteam3d.com/build/image2.jpg';
+    const url = 'https://playground.babylonjs.com/textures/grass.jpg';
     const asset = await AssetUtils.resolveAsync(url);
    
     // Load the image from local folder

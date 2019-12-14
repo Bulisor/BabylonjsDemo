@@ -134,24 +134,25 @@ class SceneComp3 extends React.Component {
         light.intensity = 0.7; 
 
         // Add the environment manually, instead of createDefaultEnvironment function
-        const envTexture = CubeTexture.CreateFromPrefilteredData('https://preview.smarteam3d.com/build/environment.dds', scene);
+        const envTexture = CubeTexture.CreateFromPrefilteredData('https://playground.babylonjs.com/textures/environment.dds', scene);
         envTexture.name = "envTex";
         envTexture.gammaSpace = false;
         scene.environmentTexture = envTexture;
 
         // Add environmentBRDFTexture to avoid calling GetEnvironmentBRDFTexture internally- use Image tag
-        const urlBRDF = 'https://preview.smarteam3d.com/build/correlatedMSBRDF_RGBD.png';
+        const urlBRDF = 'https://assets.babylonjs.com/environments/correlatedMSBRDF_RGBD.png';
         const assetBRDF = await AssetUtils.resolveAsync(urlBRDF);
         const envBRDFTexture = Texture.LoadFromDataString("image", assetBRDF, scene, true,true,true, Texture.BILINEAR_SAMPLINGMODE);
         envBRDFTexture.isRGBD = true;
         scene.environmentBRDFTexture = envBRDFTexture;
 
-        const ms = (await SceneLoader.ImportMeshAsync('', "https://preview.smarteam3d.com/build/", "BrainStem.gltf", scene, null, '.gltf')).meshes;
+        const ms = (await SceneLoader.ImportMeshAsync("", "https://www.babylonjs-playground.com/scenes/BrainStem/", "BrainStem.gltf", scene, null, ".gltf")).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://www.babylonjs-playground.com/scenes/BrainStem/", "BrainStem.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://models.babylonjs.com/shaderBall/", "BabylonShaderBall_Simple.gltf", scene, null, '.gltf')).meshes;
         // const ms = (await SceneLoader.ImportMeshAsync('', "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxTextured/glTF/", "BoxTextured.gltf", scene, null, '.gltf')).meshes;
         // alert(ms);
-        
+        ms[0].position.y = -0.5;
+
         // Load glb/gltf from local folder
         // const glb = Asset.fromModule(require('./assets/character.glb'));
         // await glb.downloadAsync();
