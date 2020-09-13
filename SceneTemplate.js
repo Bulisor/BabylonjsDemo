@@ -3,7 +3,7 @@ import { GLView } from 'expo-gl';
 import { StyleSheet } from 'react-native';
 import { PanGestureHandler, PinchGestureHandler, State } from 'react-native-gesture-handler';
 
-import { Engine } from "@babylonjs/core/Engines/engine";
+import ExpoEngine from "./ExpoEngine";
 import { Scene } from "@babylonjs/core/scene";
 
 import { Database } from "@babylonjs/core/Offline/database";
@@ -70,7 +70,7 @@ class SceneTemplate extends React.Component {
 
     _onGLContextCreate = async gl => {
         // Get the gl context and associate a Babylon Engine to it.
-        const engine = new Engine(gl, true, {}, false);
+        const engine = new ExpoEngine(gl, true, {}, false);
         
         // Disable LoadingScreen and IDBStorage
         SceneLoader.ShowLoadingScreen = false;
